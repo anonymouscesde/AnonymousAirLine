@@ -14,9 +14,22 @@ public class Main {
 
         do{
             System.out.println("MENU\n");
-            System.out.println("1.");
+            System.out.println("1.registrar empleado \n2.ver todos los empleados \n3.ver todos los viajes del empleado \n4.registro empleado \n5.registro de viaje \n6.salir");
 
-        }
+            System.out.println("Digite una opcion: ");
+            opcion = entradaPorTeclado.nextInt();
+
+            switch (opcion){
+                case 1:
+                    int registro;
+                    System.out.println("tipo de empleado que desea registrar: ");
+                    registro = entradaPorTeclado.nextInt();
+
+
+
+            }
+
+        }while (opcion!=6);
 
     }
 }

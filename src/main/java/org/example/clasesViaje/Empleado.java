@@ -3,9 +3,9 @@ package org.example.clasesViaje;
 import java.util.Scanner;
 
 public class Empleado {
-    Scanner entradaPorTeclado=new Scanner(System.in);
+    Scanner entradaPorTeclado = new Scanner(System.in);
     //atributos
-    private String nombre, id, tipoDeEmpelado;
+    private String nombre, apellido, id, tipoDeEmpelado;
     private int edad;
     private double salario;
 
@@ -14,14 +14,24 @@ public class Empleado {
     public Empleado() {
     }
 
-    public Empleado(String nombre, String id, String tipoDeEmpelado, int edad, double salario) {
+    public Empleado(Scanner entradaPorTeclado, String nombre, String apellido, String id, String tipoDeEmpelado, int edad, double salario) {
+        this.entradaPorTeclado = entradaPorTeclado;
         this.nombre = nombre;
+        this.apellido = apellido;
         this.id = id;
         this.tipoDeEmpelado = tipoDeEmpelado;
         this.edad = edad;
         this.salario = salario;
     }
-    //get and set
+
+
+    public Scanner getEntradaPorTeclado() {
+        return entradaPorTeclado;
+    }
+
+    public void setEntradaPorTeclado(Scanner entradaPorTeclado) {
+        this.entradaPorTeclado = entradaPorTeclado;
+    }
 
     public String getNombre() {
         return nombre;
@@ -29,6 +39,14 @@ public class Empleado {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    public String getApellido() {
+        return apellido;
+    }
+
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
     }
 
     public String getId() {

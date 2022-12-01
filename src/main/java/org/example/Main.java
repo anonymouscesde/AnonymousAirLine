@@ -9,6 +9,7 @@ public class Main {
     public static void main(String[] args) {
         Scanner entradaPorTeclado = new Scanner(System.in);
         ArrayList<Empleado> empleados = new ArrayList<Empleado>();
+        Empleado objetoEmpleado;
 
         int opcion;
 
@@ -21,9 +22,37 @@ public class Main {
 
             switch (opcion){
                 case 1:
-                    int registro;
-                    System.out.println("tipo de empleado que desea registrar: ");
-                    registro = entradaPorTeclado.nextInt();
+                    System.out.println("ingrese su id: ");
+                    String idEmpleado = entradaPorTeclado.next();
+
+                    boolean validar = false;
+
+                    for (Empleado empleado: empleados) {
+                        if (empleado.getId().equals(idEmpleado)){
+                            validar = true;
+                            break;
+
+                        }else {
+                            validar = false;
+                        }
+
+                    }
+                    if(validar){
+                        System.out.println("este id ya existe");
+                    }else {
+                        objetoEmpleado = new Empleado();
+
+                        objetoEmpleado.setId(idEmpleado);
+                        System.out.print("Digite el nombre del jugador: ");
+                        objetoEmpleado.setNombre(entradaPorTeclado.next());
+                        System.out.print("Digite el apellido del jugador: ");
+                        objetoEmpleado.setApellido(entradaPorTeclado.next());
+                        System.out.print("Digite la posicion del jugador: ");
+                        objetoEmpleado.setTipoDeEmpelado(entradaPorTeclado.next());
+
+                    }
+
+
 
 
 

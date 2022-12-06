@@ -1,5 +1,6 @@
 package org.example.clasesViaje;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Empleado {
@@ -82,5 +83,16 @@ public class Empleado {
 
     public void setSalario(double salario) {
         this.salario = salario;
+    }
+
+    public Empleado buscarEmpleado(ArrayList<Empleado> empleados, String idABuscar) {
+        Empleado empleadoEncontrado = null;
+        for (Empleado empleado : empleados) {
+            if (empleado.getId().equals(idABuscar)) {
+                empleadoEncontrado = empleado;
+                break;
+            }
+        }
+        return empleadoEncontrado;
     }
 }

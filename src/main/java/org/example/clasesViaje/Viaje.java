@@ -1,9 +1,11 @@
 package org.example.clasesViaje;
 
+import java.util.ArrayList;
+
 public class Viaje {
 
     //atributos
-    private String origen, destino, hora, fecha, alojamiento, tipoTransporte, numeroViaje;
+    private String origen, destino, hora, fecha, alojamiento, tipoTransporte, numeroViaje, idEmpleado;
     private double costo;
 
 
@@ -12,7 +14,7 @@ public class Viaje {
     public Viaje() {
     }
 
-    public Viaje(String origen, String destino, String hora, String fecha, String alojamiento, String tipoTransporte, String numeroViaje, double costo) {
+    public Viaje(String origen, String destino, String hora, String fecha, String alojamiento, String tipoTransporte, String numeroViaje, String idEmpleado, double costo) {
         this.origen = origen;
         this.destino = destino;
         this.hora = hora;
@@ -20,10 +22,19 @@ public class Viaje {
         this.alojamiento = alojamiento;
         this.tipoTransporte = tipoTransporte;
         this.numeroViaje = numeroViaje;
+        this.idEmpleado = idEmpleado;
         this.costo = costo;
     }
 
     //get and set
+
+    public String getIdEmpleado() {
+        return idEmpleado;
+    }
+
+    public void setIdEmpleado(String idEmpleado) {
+        this.idEmpleado = idEmpleado;
+    }
 
     public String getOrigen() {
         return origen;
@@ -87,5 +98,20 @@ public class Viaje {
 
     public void setCosto(double costo) {
         this.costo = costo;
+    }
+
+
+    public Viaje buscarViaje(ArrayList<Viaje> viajes, String idABuscar) {
+        Viaje viajeEncontrado = null;
+        for (Viaje viaje : viajes) {
+            if (viaje.getIdEmpleado().equals(idABuscar)) {
+                viajeEncontrado = viaje;
+                break;
+            }
+
+
+        }
+        return viajeEncontrado;
+
     }
 }

@@ -63,27 +63,15 @@ public class Main {
                     break;
 
                 case 2:
-                    System.out.println("ingrese su numero de vuelo: ");
-                    String numeroVuelo = entradaPorTeclado.next();
+                    System.out.println("ingrese el id del empleado");
+                    idEmpleado = entradaPorTeclado.next();
+                    objetoEmpleado = new Empleado();
+                    Empleado trabajador = objetoEmpleado.buscarEmpleado(empleados, idEmpleado);
 
-                    boolean verificar = false;
-
-                    for (Viaje viaje : viajes) {
-                        if (viaje.getNumeroViaje().equals(numeroVuelo)) {
-                            verificar = true;
-                            break;
-
-                        } else {
-                            verificar = false;
-                        }
-
-                    }
-                    if (verificar) {
-                        System.out.println("este numero de vuelo ya existe");
-                    } else {
+                    if (trabajador != null) {
                         objetoViaje = new Viaje();
+                        objetoViaje.setIdEmpleado(idEmpleado);
 
-                        objetoViaje.setNumeroViaje(numeroVuelo);
                         System.out.print("Digite el origen del viaje: ");
                         objetoViaje.setOrigen(entradaPorTeclado.next());
                         System.out.print("Digite el destino del viaje: ");
@@ -94,37 +82,66 @@ public class Main {
                         objetoViaje.setFecha(entradaPorTeclado.next());
                         System.out.print("Digite el alojamiento: ");
                         objetoViaje.setAlojamiento(entradaPorTeclado.next());
-                        System.out.print("Digite el tipo de transporte: ");
+                        System.out.print("Digite el tipo de transporte(nacional o internacional): ");
                         objetoViaje.setTipoTransporte(entradaPorTeclado.next());
                         System.out.print("Digite el costo del viaje: ");
                         objetoViaje.setCosto(entradaPorTeclado.nextDouble());
 
                         viajes.add(objetoViaje);
 
+                        if (trabajador.getTipoDeEmpelado().equals("senior") && objetoViaje.getTipoTransporte().equals("nacional")) {
+                            trabajador.setSalario(trabajador.getSalario()+(trabajador.getSalario())*0.3);
+
+                        } else if (trabajador.getTipoDeEmpelado().equals("senior") && objetoViaje.getTipoTransporte().equals("internacional")) {
+                            trabajador.setSalario(trabajador.getSalario()+(trabajador.getSalario())*0.5);
+                        }else if (trabajador.getTipoDeEmpelado().equals("junior") && objetoViaje.getTipoTransporte().equals("nacional")){
+                            trabajador.setSalario(trabajador.getSalario()+(trabajador.getSalario())*0.2);
+                        }else if (trabajador.getTipoDeEmpelado().equals("junior") && objetoViaje.getTipoTransporte().equals("internacional")) {
+                            trabajador.setSalario(trabajador.getSalario() + (trabajador.getSalario()) * 0.4);
+                        }
+
+                    } else {
+                        System.out.println("este empleado no existe");
                     }
+
+                    break;
                 case 3:
                     System.out.println("Listado de empleados: ");
-                    for (Empleado empleado: empleados){
+                    for (Empleado empleado : empleados) {
                         System.out.println("Informacion");
                         System.out.println("Nombre: " + empleado.getNombre());
                         System.out.println("Apellido: " + empleado.getApellido());
                         System.out.println("Tipo de empleado: " + empleado.getTipoDeEmpelado());
                         System.out.println("Edad: " + empleado.getEdad());
                         System.out.println("Salario: " + empleado.getSalario());
-                    }break;
+                    }
+                    break;
 
                 case 4:
-                    System.out.println("Listado de viajes: ");
-                    for (Viaje viaje: viajes){
-                        System.out.println("Informacion");
-                        System.out.println("Origen: " + viaje.getOrigen());
-                        System.out.println("Destino: " + viaje.getDestino());
-                        System.out.println("Hora: " + viaje.getHora());
-                        System.out.println("Fecha: " + viaje.getFecha());
-                        System.out.println("Alojamiento: " + viaje.getAlojamiento());
-                        System.out.println("Tipo de transporte: " + viaje.getTipoTransporte());
-                        System.out.println("costo de viaje: " + viaje.getCosto());
-                    }break;
+                    objetoViaje = new Viaje();
+                    System.out.println("ingrese el id del empleado a mostrar el viaje");
+                    idEmpleado = entradaPorTeclado.next();
+                    Viaje viajeEncontrado = objetoViaje.buscarViaje(viajes, idEmpleado);
+                    if (viajeEncontrado != null) {
+                        System.out.println("Listado de viajes: ");
+                        for (Viaje viaje : viajes) {
+                            if (viaje.getIdEmpleado().equals(viajeEncontrado.getIdEmpleado())) {
+                                System.out.println("Origen: " + viaje.getOrigen());
+                                System.out.println("Destino: " + viaje.getDestino());
+                                System.out.println("Hora: " + viaje.getHora());
+                                System.out.println("Fecha: " + viaje.getFecha());
+                                System.out.println("Alojamiento: " + viaje.getAlojamiento());
+                                System.out.println("Tipo de transporte: " + viaje.getTipoTransporte());
+                                System.out.println("costo de viaje: " + viaje.getCosto());
+                            }
+                        }
+
+
+                    } else {
+                        System.out.println("el empleado no tiene viajes");
+                    }
+
+                    break;
 
                 case 5:
                     System.out.println("Fin de la ejecucion");
@@ -135,7 +152,7 @@ public class Main {
 
             }
 
-        }while (opcion != 5) ;
+        } while (opcion != 5);
 
     }
 }
